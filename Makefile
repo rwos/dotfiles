@@ -1,4 +1,6 @@
+FILES=.bashrc .vimrc .wmii/
+
 all:
-	cp ./.[a-zA-Z0-9]* ~/
+	cp -R $(FILES) ~/
 	@echo "source ~/.bashrc"
 

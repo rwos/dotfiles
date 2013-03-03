@@ -1,0 +1,20 @@
+MODKEY=Mod4
+
+# Colors tuples: "<text> <background> <border>"
+export WMII_NORMCOLORS='#aaaaaa #000000 #000000'
+export WMII_FOCUSCOLORS='#00dd00 #000000 #000000'
+export WMII_BACKGROUND='#000000'
+
+export WMII_BACKGROUND='#000000'
+export WMII_FONT='fixed'
+
+export WMII_TERM="xterm"
+
+wmiir xwrite /ctl colmode default
+
+status() {
+    uptime=`uptime | sed 's/,.*//'`
+    mixer=`amixer -c 0 get Master | grep 'Mono: Playback' | sed 's/.*back //'`
+	echo -n $mixer '|' $uptime '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date +%s) '-' $(date)
+}
+
