@@ -1,20 +1,52 @@
 MODKEY=Mod4
 
 # Colors tuples: "<text> <background> <border>"
+#export WMII_NORMCOLORS='#aaaaaa #111111 #111111'
+#export WMII_FOCUSCOLORS='#ffff00 #333333 #333333'
+#export WMII_BACKGROUND='#000000'
 export WMII_NORMCOLORS='#aaaaaa #000000 #000000'
-export WMII_FOCUSCOLORS='#00dd00 #000000 #000000'
+export WMII_FOCUSCOLORS='#ffff00 #333333 #333333'
 export WMII_BACKGROUND='#000000'
 
-export WMII_BACKGROUND='#000000'
 export WMII_FONT='fixed'
 
-export WMII_TERM="xterm"
+export WMII_TERM="uxterm -rv"
 
 wmiir xwrite /ctl colmode default
 
 status() {
-    uptime=`uptime | sed 's/,.*//'`
-    mixer=`amixer -c 0 get Master | grep 'Mono: Playback' | sed 's/.*back //'`
-	echo -n $mixer '|' $uptime '|' $(uptime | sed 's/.*://; s/,//g') '|' $(date +%s) '-' $(date)
+
+    battery=`acpi -b | sed 's/Battery 0: //' | sed 's/,/ -/g' | tr '[:upper:]' '[:lower:]' | grep -v zero`
+    battery_low=`echo "$battery" | egrep '[^0-9][0-9]%' | grep discharging`
+    blink_file="/tmp/wmii_status_blink"
+    if [ -n "$battery_low" ]; then
+        if [ -f "$blink_file" ]; then
+            echo -n "colors #000000 #ffff00 #ffff00\nlabel $battery" | wmiir create /rbar/battery
+            rm "$blink_file"
+        else
+            echo -n "colors #000000 #ff0000 #ff0000\nlabel $battery" | wmiir create /rbar/battery
+            touch "$blink_file"
+        fi
+    else
+        echo -n "colors #aaaaaa #000000 #000000\nlabel $battery" | wmiir create /rbar/battery
+    fi
+
+    mixer_pcnt=`amixer -c 0 get Master | grep 'Mono: Playback' | sed 's/.*\[\([0-9]\+\)%.*/\1/g'`
+    mixer=`percent-bar $mixer_pcnt 2`
+    echo -n "colors #555555 #000000 #000000\nlabel $mixer" | wmiir create /rbar/mixer
+
+    wlan_name=`iwconfig wlan0 | grep ESSID | sed 's/.*ESSID://' | sed 's/"//g'`
+    wlan_quality=`iwconfig wlan0 | awk '/Quality/{print $2}' | sed 's/.*=//' | awk -F"/" '{printf("%03.0f", $1/$2*100)}'`
+    wlan="$wlan_quality%"
+
+    mem_total=`free -h | grep Mem | awk '{print $2}'`
+    mem_free=`free -h | grep '\-/+' | awk '{print $4}'`
+    load=`uptime | sed 's/.*://; s/,//g'`
+    uptime=`uptime | sed 's/.*up/up/; s/,.*//'`
+	echo -n label \
+        $wlan_name $wlan '|' \
+        $mem_free 'of' $mem_total 'MB free' '|' $load '|' $uptime '|' \
+        $(date +%s) '-' $(date)
 }
+
 
