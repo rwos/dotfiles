@@ -32,7 +32,14 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias man='LANG=C; man'
+
+export LANG=C
+
+# in wmii, display current dir as term title
+WMII_IS_RUNNING=`ps a | grep wmii | grep -v grep`
+if [ -n "$WMII_IS_RUNNING" ]; then
+  PROMPT_COMMAND='dirs | perl -pe "chomp if eof" | wmiir write /client/sel/label'
+fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -53,4 +60,10 @@ fi
 set -o vi
 export SVN_EDITOR=vi
 export VISUAL=vi
+
+#co-up
+alias klingel='curl 192.168.2.5/letmein'
+
+#dev
+export PATH="/opt/semper/bin:$PATH"
 
