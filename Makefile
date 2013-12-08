@@ -1,5 +1,5 @@
 FILES=bashrc vimrc
-DIRS=wmii
+DIRS=wmii vim
 
 .PHONY: all $(FILES) $(DIRS)
 
