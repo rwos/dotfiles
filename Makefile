@@ -1,6 +1,13 @@
-FILES=.bashrc .vimrc .wmii/
+FILES=bashrc vimrc
+DIRS=wmii
 
-all:
-	cp -R $(FILES) ~/
-	@echo "source ~/.bashrc"
+.PHONY: all $(FILES) $(DIRS)
+
+all: $(FILES) $(DIRS)
+
+$(FILES):
+	cp -R "$@" "$(HOME)/.$@"
+
+$(DIRS):
+	rsync -a --progress "$@/" "$(HOME)/.$@/"
 
