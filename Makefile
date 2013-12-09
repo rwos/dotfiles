@@ -1,4 +1,4 @@
-FILES=bashrc vimrc
+FILES=bashrc vimrc xinitrc
 DIRS=wmii vim
 
 .PHONY: all $(FILES) $(DIRS)
