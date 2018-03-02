@@ -1,9 +1,9 @@
-FILES=bashrc vimrc xinitrc
+FILES=bashrc vimrc gitconfig
 DIRS=wmii vim
 
-.PHONY: all $(FILES) $(DIRS)
+.PHONY: all $(FILES) $(DIRS) install
 
-all: $(FILES) $(DIRS)
+all: $(FILES) $(DIRS) install
 
 $(FILES):
 	cp -R "$@" "$(HOME)/.$@"
@@ -11,3 +11,5 @@ $(FILES):
 $(DIRS):
 	rsync -a --progress "$@/" "$(HOME)/.$@/"
 
+install:
+	sudo apt-get install tree vim ctags vim-doc

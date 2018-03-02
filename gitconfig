@@ -1,0 +1,14 @@
+[user]
+	name = Richard Wossal
+	email = richard@r-wos.org
+	signingkey = FC9E6FF83D61F1B3
+[core]
+	excludesfile = /home/richard/config/gitignore
+[diff]
+    compactionHeuristic = true
+[difftool]
+    prompt = false
+[merge]
+    conflictstyle = diff3
+[commit]
+    gpgSign = true

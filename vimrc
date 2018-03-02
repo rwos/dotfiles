@@ -9,7 +9,9 @@ set nowrap
 set nojoinspaces
 " user interface
 set mouse=a
-set listchars=tab:>-,trail:X
+set mousemodel=extend
+set clipboard=unnamed,unnamedplus
+set listchars=tab:>-,trail:†
 syntax on
 set display=uhex
 set nu
@@ -17,12 +19,17 @@ set ruler
 set rulerformat=%30(%=\ %l,%c%V\ %P%)
 set cursorline
 set shortmess+=filmnrxoOtT
+set colorcolumn=80,120
 " no error bell
 set noeb vb t_vb=
 " color
 set t_Co=256
 set bg=dark
 color rwos
+syntax on
+" search
+set hlsearch
+set incsearch
 
 set spell spelllang=en_us
 set nospell
@@ -49,8 +56,11 @@ autocmd filetype ruby,coffee,html setlocal autoindent
 " auto complete on shift-tab
 imap [Z <C-x><C-o>
 
+" v the whole file
+nmap <F11> <ESC>0GVgg
+
 " php stuff
-imap <F12> <esc>iecho "<pre>";var_dump($);die;<ESC>?(<ENTER>ci($
+imap <F12> <ESC>iecho "<pre>";var_dump($);die;<ESC>?(<ENTER>ci($
 
 " ruby stuff
 au BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspec	set filetype=ruby
@@ -75,3 +85,17 @@ au BufNewFile,BufRead *.cs,*.coffee	set filetype=coffee
 "au BufNewFile,BufRead *.twig set filetype=twig
 " HTML Twig
 au BufNewFile,BufRead *.twig,*.html.twig set filetype=html.twig
+
+" haxe
+au BufNewFile,BufRead *.hx set filetype=haxe
+
+"" xml autoindent
+"if version >= 540
+"  augroup filetype
+"    autocmd FileType xml '[,']!xsltproc ~/.vim/indent.xsl %
+"  augroup END
+"endif
+"" other autocmds
+"if version>540
+"  autocmd!
+"endif

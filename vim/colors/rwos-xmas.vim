@@ -1,4 +1,4 @@
-let g:colors_name = "rwos"
+let g:colors_name = "rwos-subtle"
 
 """ user interface
 
@@ -34,18 +34,26 @@ hi Todo ctermbg=black ctermbg=yellow cterm=NONE
 
 """ programming stuff
 
-hi Comment ctermfg=green ctermbg=NONE cterm=NONE
+hi Comment ctermfg=lightgrey ctermbg=NONE cterm=NONE
 
-hi Constant ctermfg=NONE ctermbg=NONE cterm=underline
+hi Constant ctermfg=green ctermbg=NONE cterm=underline
 hi String ctermfg=red ctermbg=NONE cterm=NONE
 hi Character ctermfg=yellow ctermbg=NONE cterm=NONE
 hi Number ctermfg=yellow ctermbg=NONE cterm=NONE
 hi Float ctermfg=yellow ctermbg=NONE cterm=NONE
 hi Boolean ctermfg=yellow ctermbg=NONE cterm=NONE
 
-hi Identifier ctermfg=lightgreen ctermbg=NONE cterm=NONE
-hi Statement ctermfg=lightblue ctermbg=NONE cterm=NONE
-hi Operator ctermfg=lightblue ctermbg=NONE cterm=NONE
+hi Identifier ctermfg=lightblue ctermbg=NONE cterm=NONE
+hi Statement ctermfg=lightgreen ctermbg=NONE cterm=NONE
+hi Operator ctermfg=lightred ctermbg=NONE cterm=NONE
+hi Function ctermfg=lightgreen ctermbg=NONE cterm=NONE
+hi StorageClass ctermfg=lightgrey ctermbg=NONE cterm=NONE
+hi Exception ctermfg=red ctermbg=NONE cterm=NONE
+hi PreProc ctermfg=lightgreen ctermbg=NONE cterm=NONE
+hi Keyword ctermfg=blue ctermbg=NONE cterm=NONE
+hi Type ctermfg=green ctermbg=NONE cterm=NONE
+hi Special ctermfg=cyan ctermbg=NONE cterm=NONE
+hi SpecialChar ctermfg=magenta ctermbg=NONE cterm=NONE
 
 """ diff
 
