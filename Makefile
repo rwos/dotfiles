@@ -3,7 +3,8 @@ DIRS=wmii vim
 
 .PHONY: all $(FILES) $(DIRS) install gpg setup
 
-all: $(FILES) $(DIRS) install gpg setup
+all: $(FILES) $(DIRS)
+init: install gpg setup
 
 $(FILES):
 	cp -R "$@" "$(HOME)/.$@"
