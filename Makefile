@@ -1,10 +1,25 @@
+SHELL=/bin/bash
+
 FILES=bashrc vimrc gitconfig racketrc
 DIRS=wmii vim
 
-.PHONY: all $(FILES) $(DIRS) install gpg setup
+GH_REPOS=rwos/quake-online-thingy rwos/quakejs rwos/ioq3 rwos/gti \
+	rwos/gifstopmotion rwos/rpterm rwos/xterm.js \
+	rwos/fdcli rwos/hangouts-game rwos/website rwos/vagrant-cowsay-fortune \
+	rwos/git-remind rwos/ludum-dare-26 rwos/sidescroll rwos/slacker \
+	rwos/img2ascii rwos/ludum-dare-24 rwos/scrapyard rwos/minslide \
+	rwos/processing_hacks rwos/powerplain rwos/voronoi-mandelbrot \
+	rwos/render-brot rwos/newsqueak rwos/my_brain_hurts
+
+BB_REPOS=rwos_/newshell rwos_/planeproject rwos_/exempli-gratia rwos_/rrpl \
+	rwos_/doubleprec rwos_/semper rwos_/unix-utils rwos_/craysim rwos_/rterm
+
+GO_REPOS=bitbucket.org/rwos_/code-hash
+
+.PHONY: all $(FILES) $(DIRS) install gpg setup src
 
 all: $(FILES) $(DIRS)
-init: install gpg setup
+init: install gpg setup src
 
 $(FILES):
 	cp -R "$@" "$(HOME)/.$@"
@@ -19,6 +34,8 @@ install:
 	sudo apt-get install tree vim ctags vim-doc htop
 	# useful utilities
 	sudo apt-get install ntfs-3g iotop powertop lvm2
+	# terminal dev stuff
+	sudo apt-get install golang-1.9
 	# desktop utils
 	sudo apt-get install kgpg \
 		configure-trackpoint gksu \
@@ -34,3 +51,9 @@ gpg:
 setup:
 	sudo rm -f /etc/fonts/conf.d/70-no-bitmaps.conf
 	sudo ln -s /etc/fonts/conf.d.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-no-bitmaps.conf
+
+src:
+	. ~/.bashrc
+	cd ~/src && mkdir -p go/src
+	cd ~/src && (for r in $(GH_REPOS); do git clone git@github.com:$${r}.git || test -d `basename $$r`; done)
+	cd ~/src && (for r in $(BB_REPOS); do git clone git@bitbucket.org:$${r}.git || test -d `basename $$r`; done)

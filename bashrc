@@ -54,14 +54,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-. /opt/semper/prog/aliases
+#. /opt/semper/prog/aliases
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
-fi
+#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    #. /etc/bash_completion
+#fi
 
 set -o vi
 export SVN_EDITOR=vi
@@ -112,16 +112,16 @@ alias vi="vi -o"
 
 alias lf="less +%F $(ls -t | head -n 1)"
 
-function vigrep {
-    files=""
-    for c in `grep -Rn "$@" | cut -d ':' -f 1,2 | sort | uniq`
-    do
-        f=`echo $c | cut -d ':' -f 1`
-        #n=`echo $c | cut -d ':' -f 2`
-        files="$files $f"
-    done
-    vim -o $files
-}
+#function vigrep {
+#    files=""
+#    for c in `grep -Rn "$@" | cut -d ':' -f 1,2 | sort | uniq`
+#    do
+#        f=`echo $c | cut -d ':' -f 1`
+#        #n=`echo $c | cut -d ':' -f 2`
+#        files="$files $f"
+#    done
+#    vim -o $files
+#}
 
 
 export NVM_DIR="/home/richard/.nvm"
