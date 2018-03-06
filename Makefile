@@ -41,6 +41,9 @@ install:
 		configure-trackpoint gksu \
 	# desktop programs
 	sudo apt-get install gimp chromium-browser
+	# mail
+	sudo apt-get install mutt msmtp-mta getmail4
+	sudo apt-get purge kmail
 	# desktop dev stuff
 	sudo apt-get install qtcreator qtquickcontrols2-5-dev qt5-default qtdeclarative5-dev
 
@@ -49,8 +52,13 @@ gpg:
 	gpg --import < ~/.gnupg/pubring.gpg
 
 setup:
+	# X11 fonts
 	sudo rm -f /etc/fonts/conf.d/70-no-bitmaps.conf
 	sudo ln -s /etc/fonts/conf.d.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-no-bitmaps.conf
+	# /tmp as ramdisk
+	sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/tmp.mount
+	sudo systemctl enable tmp.mount
+	sudo systemctl start tmp.mount
 
 src:
 	. ~/.bashrc

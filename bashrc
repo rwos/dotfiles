@@ -34,7 +34,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
 
-export LANG=C
+export LANG=en_US.UTF-8
 
 #PROMPT_COMMAND='history -a;history -n'
 PROMPT_COMMAND=''
@@ -59,9 +59,9 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    #. /etc/bash_completion
-#fi
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
 set -o vi
 export SVN_EDITOR=vi
