@@ -1,0 +1,3 @@
+text/html; firefox --new-tab %s; needsterminal
+application/pdf; evince %s
+image/*; eog '%s'; test=test -n "$DISPLAY"

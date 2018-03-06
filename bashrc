@@ -35,6 +35,7 @@ alias l='ls -CF'
 alias ..='cd ..'
 
 export LANG=en_US.UTF-8
+export LANGUAGE=en
 
 # display current dir as term title
 PROMPT_COMMAND='printf "\033]2;%s\033" "`dirs`"'

@@ -1,6 +1,6 @@
 SHELL=/bin/bash
 
-FILES=bashrc vimrc gitconfig racketrc
+FILES=bashrc vimrc gitconfig racketrc muttrc mailcap
 DIRS=wmii vim
 
 GH_REPOS=rwos/quake-online-thingy rwos/quakejs rwos/ioq3 rwos/gti \
@@ -16,13 +16,16 @@ BB_REPOS=rwos_/newshell rwos_/planeproject rwos_/exempli-gratia rwos_/rrpl \
 
 GO_REPOS=bitbucket.org/rwos_/code-hash
 
-.PHONY: all $(FILES) $(DIRS) install gpg setup src
+.PHONY: all $(FILES) $(DIRS) install gpg setup src sig
 
-all: $(FILES) $(DIRS)
+all: $(FILES) $(DIRS) sig
 init: install gpg setup src
 
 $(FILES):
 	cp -R "$@" "$(HOME)/.$@"
+
+sig:
+	cp sig "$(HOME)/sig"
 
 $(DIRS):
 	rsync -a --progress "$@/" "$(HOME)/.$@/"
@@ -35,7 +38,7 @@ install:
 	# useful utilities
 	sudo apt-get install ntfs-3g iotop powertop lvm2
 	# terminal dev stuff
-	sudo apt-get install golang-1.9
+	sudo apt-get install golang-1.9 gccgo-go
 	# desktop utils
 	sudo apt-get install kgpg \
 		configure-trackpoint gksu \
@@ -43,7 +46,9 @@ install:
 	sudo apt-get install gimp chromium-browser
 	# mail
 	sudo apt-get install mutt msmtp-mta getmail4 urlview
-	sudo apt-get purge kmail
+	sudo apt-get purge kmail akonadi-server
+	# etc
+	go get -u -v github.com/ncw/rclone
 	# desktop dev stuff
 	sudo apt-get install qtcreator qtquickcontrols2-5-dev qt5-default qtdeclarative5-dev
 
@@ -55,6 +60,8 @@ setup:
 	# X11 fonts
 	sudo rm -f /etc/fonts/conf.d/70-no-bitmaps.conf
 	sudo ln -s /etc/fonts/conf.d.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-no-bitmaps.conf
+	# misc(fixed) that can be used by GTK/QT
+	wget -q -O - 'https://github.com/pts/fonts/blob/master/fixedsc.tgz?raw=true' |  (cd / && sudo tar xzv)
 	# /tmp as ramdisk
 	sudo cp /usr/share/systemd/tmp.mount /etc/systemd/system/tmp.mount
 	sudo systemctl enable tmp.mount

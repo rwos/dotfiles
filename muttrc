@@ -1,0 +1,134 @@
+set mbox_type=Maildir
+set folder="$HOME/mail"
+set mask="!^\\.[^.]"
+set mbox="~/mail"
+set record="+.Sent"
+set postponed="+.Drafts"
+set spoolfile="~/mail"
+set send_charset="us-ascii:utf-8"
+set mail_check=5
+set timeout=30
+set sleep_time=0
+
+set header_cache=~/.muttcache
+set header_cache_compress=no
+
+set mime_forward=yes
+
+### sendmail
+
+set realname="Richard Wossal"
+
+set envelope_from=yes
+set use_domain=no
+set reverse_name=yes
+
+set edit_headers=yes
+set signature ="~/sig"
+set sig_dashes=no
+set attribution="%f said:"
+
+send-hook . set from="richard@r-wos.org"
+send-hook . my_hdr Reply-To: richard@r-wos.org
+send-hook . set sendmail="/usr/bin/msmtp"
+
+# find maildir++ subdirs
+mailboxes `echo -n "+ "; find ~/mail -maxdepth 1 -type d -name ".*" -printf "+'%f' "`
+
+subscribe netbsd-users@netbsd.org netbsd-bugs@NetBSD.org tech-kern@netbsd.org
+subscribe tech-toolchain@netbsd.org regional-de@netbsd.org netbsd-docs@NetBSD.org
+subscribe tech-userlevel@NetBSD.org tech-install@NetBSD.org security-officer@NetBSD.org
+subscribe security-announce@NetBSD.org
+
+subscribe discussion@lists.en.qi-hardware.com
+
+subscribe gforth@gnu.org
+subscribe users@racket-lang.org
+subscribe racket-users@googlegroups.com
+subscribe bephpug@thing.org
+
+subscribe coreutils@gnu.org
+
+subscribe dietlibc@fefe.de
+
+subscribe texmacs-dev@gnu.org
+
+subscribe json-schema@googlegroups.com
+subscribe lisp-in-summer-projects-2013-discuss@lispnyc.org
+subscribe poppler@lists.freedesktop.org
+subscribe zf-contributors@lists.zend.com
+subscribe debate@lists.ccc.de
+subscribe berlin-compiler-meetup@googlegroups.com
+
+subscribe public-annotation@w3.org
+
+subscribe team@imagineeasy.com
+
+subscribe guix-devel@gnu.org
+
+### aliases
+
+#set alias_file=~/muttalias
+#source ~/muttalias
+#set reverse_alias
+
+### ui
+
+set sort=threads
+set sort_aux=reverse-date
+
+set confirmappend=no
+set abort_nosubject=yes # automatically abort if no subject given
+set fast_reply=yes
+set include=yes
+
+set duplicate_threads=yes
+set auto_tag=yes
+
+macro index c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro compose A "<attach-message>?<toggle-mailboxes>" "attach message(s) to this message"
+
+macro index G "T ~l | ~f notifications@github.com | ~f noreply@flowdock.com | ~f builds@travis-ci.com | ~f notifications@travis-ci.org" "Select all automatic notifications"
+macro pager G "T ~l | ~f notifications@github.com | ~f noreply@flowdock.com | ~f builds@travis-ci.com | ~f notifications@travis-ci.org" "Select all automatic notifications"
+
+macro index X "s=.spam\n" "file as Spam"
+macro pager X "s=.spam\n" "file as Spam"
+
+macro index A "s=.archive\n" "archive"
+macro pager A "s=.archive\n" "archive"
+
+### display
+
+color status brightwhite black
+color indicator brightwhite black
+color tree white black
+color index yellow black "~l | ~f notifications@github.com | ~f noreply@flowdock.com | ~f builds@travis-ci.com | ~f notifications@travis-ci.org"
+color index green black "~f @chegg.com"
+color index brightgreen black "~b rwos | ~C mention@noreply.github.com"
+color index brightblue black "~b Richard | ~b Wossal"
+color index red black "~f support@tideways.io | ~f no-reply@loggly.com"
+
+set tilde=yes
+set help=no
+
+set date_format="%a %F %R"
+
+set status_format="%b %f %n/%m new %*─"
+
+set folder_format="%2C %8s %d %t %N %f"
+
+set index_format="%4C │%Z│ %20.20n %-30.30a %s %> %t │ %D"
+set narrow_tree=yes
+
+set pager_format="<%a> %s"
+set pager_index_lines=10
+set pager_stop=yes
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+unset allow_8bit
+set editor="vim -c 'startinsert' -c 'set tw=70 et' -c 'set wrap' '+/^$'" 
