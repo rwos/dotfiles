@@ -14,8 +14,6 @@ GH_REPOS=rwos/quake-online-thingy rwos/quakejs rwos/ioq3 rwos/gti \
 BB_REPOS=rwos_/newshell rwos_/planeproject rwos_/exempli-gratia rwos_/rrpl \
 	rwos_/doubleprec rwos_/semper rwos_/unix-utils rwos_/craysim rwos_/rterm
 
-GO_REPOS=bitbucket.org/rwos_/code-hash
-
 .PHONY: all $(FILES) $(DIRS) install gpg setup src sig
 
 all: $(FILES) $(DIRS) sig
@@ -34,7 +32,7 @@ install:
 	sudo apt-add-repository ppa:linrunner/thinkpad-extras
 	sudo apt-get update -y
 	# basic stuff
-	sudo apt-get install tree vim ctags vim-doc htop
+	sudo apt-get install tree vim vim-gtk ctags vim-doc htop
 	# useful utilities
 	sudo apt-get install ntfs-3g iotop powertop lvm2
 	# terminal dev stuff
@@ -70,5 +68,6 @@ setup:
 src:
 	. ~/.bashrc
 	cd ~/src && mkdir -p go/src
+	git clone git@bitbucket.org:rwos_/code-hash.git ~/src/go/src/code-hash
 	cd ~/src && (for r in $(GH_REPOS); do git clone git@github.com:$${r}.git || test -d `basename $$r`; done)
 	cd ~/src && (for r in $(BB_REPOS); do git clone git@bitbucket.org:$${r}.git || test -d `basename $$r`; done)
