@@ -42,7 +42,7 @@ install:
 	# desktop programs
 	sudo apt-get install gimp chromium-browser
 	# mail
-	sudo apt-get install mutt msmtp-mta getmail4
+	sudo apt-get install mutt msmtp-mta getmail4 urlview
 	sudo apt-get purge kmail
 	# desktop dev stuff
 	sudo apt-get install qtcreator qtquickcontrols2-5-dev qt5-default qtdeclarative5-dev

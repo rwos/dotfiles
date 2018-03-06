@@ -36,14 +36,9 @@ alias ..='cd ..'
 
 export LANG=en_US.UTF-8
 
+# display current dir as term title
+PROMPT_COMMAND='printf "\033]2;%s\033" "`dirs`"'
 #PROMPT_COMMAND='history -a;history -n'
-PROMPT_COMMAND=''
-# in wmii, display current dir as term title
-WMII_IS_RUNNING=`ps aux | grep wmii | grep -v grep`
-if [ -n "$WMII_IS_RUNNING" ]; then
-  #PROMPT_COMMAND="dirs | perl -pe 'chomp if eof' | wmiir write /client/sel/label"
-  PROMPT_COMMAND='printf "\033]2;%s\033\\" "`dirs`"'
-fi
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
