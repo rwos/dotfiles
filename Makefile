@@ -36,7 +36,7 @@ install:
 	# useful utilities
 	sudo apt-get install ntfs-3g iotop powertop lvm2
 	# terminal dev stuff
-	sudo apt-get install golang-1.9 gccgo-go
+	sudo apt-get install golang-1.9 gccgo-go racket
 	# desktop utils
 	sudo apt-get install kgpg \
 		configure-trackpoint gksu \
