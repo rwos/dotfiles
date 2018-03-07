@@ -18,6 +18,7 @@ BB_REPOS=rwos_/newshell rwos_/planeproject rwos_/exempli-gratia rwos_/rrpl \
 
 all: $(FILES) $(DIRS) sig
 init: install gpg setup src
+	@cat xkb.patch
 
 $(FILES):
 	cp -R "$@" "$(HOME)/.$@"
