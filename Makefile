@@ -35,9 +35,9 @@ install:
 	# basic stuff
 	sudo apt-get install tree vim vim-gtk ctags vim-doc htop
 	# useful utilities
-	sudo apt-get install ntfs-3g iotop powertop lvm2
+	sudo apt-get install ntfs-3g iotop powertop lvm2 net-tools nmap
 	# terminal dev stuff
-	sudo apt-get install golang-1.9 gccgo-go racket
+	sudo apt-get install golang-1.9 gccgo-go racket indent splint slint
 	# desktop utils
 	sudo apt-get install kgpg \
 		configure-trackpoint gksu \
