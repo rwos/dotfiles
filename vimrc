@@ -49,9 +49,9 @@ autocmd filetype scheme,guile,racket setlocal shiftwidth=2
 autocmd filetype scheme,guile,racket setlocal autoindent
 autocmd filetype scheme,guile,racket setlocal lisp
 
-autocmd filetype ruby,coffee,html setlocal tabstop=2
-autocmd filetype ruby,coffee,html setlocal shiftwidth=2
-autocmd filetype ruby,coffee,html setlocal autoindent
+autocmd filetype ruby,coffee,html,javascript,yaml setlocal tabstop=2
+autocmd filetype ruby,coffee,html,javascript,yaml setlocal shiftwidth=2
+autocmd filetype ruby,coffee,html,javascript,yaml setlocal autoindent
 
 " auto complete on shift-tab
 imap [Z <C-x><C-o>
@@ -80,6 +80,9 @@ au BufNewFile,BufRead *.rabl				set filetype=ruby
 
 " coffeescript stuff
 au BufNewFile,BufRead *.cs,*.coffee	set filetype=coffee
+
+" typescript
+au BufNewFile,BufRead *.ts	set filetype=javascript
 
 " twig
 "au BufNewFile,BufRead *.twig set filetype=twig
